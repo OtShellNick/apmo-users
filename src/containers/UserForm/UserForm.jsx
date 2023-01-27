@@ -1,8 +1,8 @@
 import React from "react";
-import { Formik, Field } from "formik";
-import { Box, TextField, Button, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
+import { Formik } from "formik";
+import { TextField, Button, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
 
-const UserForm = ({ initialValues, onSubmit, style, buttons }) => {
+const UserForm = ({ initialValues, onSubmit, style, buttons, isFilter = false }) => {
 
     return <Formik
         initialValues={initialValues}
@@ -10,13 +10,8 @@ const UserForm = ({ initialValues, onSubmit, style, buttons }) => {
     >
         {({
             values,
-            errors,
-            touched,
             handleChange,
-            handleBlur,
             handleSubmit,
-            isSubmitting,
-            setValues
         }) => {
             return <form
                 onSubmit={handleSubmit}
@@ -25,27 +20,31 @@ const UserForm = ({ initialValues, onSubmit, style, buttons }) => {
                     id='name'
                     size='small'
                     label='Name'
+                    value={values.name}
                     onChange={handleChange}
                 />
                 <TextField
                     id='lastName'
                     size='small'
                     label='Last Name'
+                    value={values.lastName}
                     onChange={handleChange}
                 />
                 <TextField
                     id='email'
                     size='small'
                     label='Email'
+                    value={values.email}
                     onChange={handleChange}
                 />
                 <TextField
                     id='birthDate'
                     size='small'
                     label='Birth Date'
+                    value={values.birthDate}
                     onChange={handleChange}
                 />
-                <FormControl sx={{ width: '10%' }}>
+                <FormControl sx={isFilter ? { width: '10%' } : {}}>
                     <InputLabel size="small" id="access">Access</InputLabel>
                     <Select
                         labelId="access"

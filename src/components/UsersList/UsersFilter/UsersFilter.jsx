@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/material";
 
+import { getUsers } from "@actions/users";
 import { updateUsersList } from "@store/usersStore";
 
 import UserForm from "@containers/UserForm/UserForm";
 
 import './UsersFilter.scss';
-import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../../actions/users";
 
 const UsersFilter = () => {
     const dispatch = useDispatch();
@@ -37,7 +37,6 @@ const UsersFilter = () => {
                 filteredUsers = tempUsers;
             }
 
-            console.log(access, tempUsers, filteredUsers)
             dispatch(updateUsersList(filteredUsers));
         } catch (e) {
             console.log(e)
@@ -53,12 +52,13 @@ const UsersFilter = () => {
         }}>
         <span style={{ marginRight: 10 }}>Filter:</span>
         <UserForm
+            isFilter
             initialValues={{
                 name: '',
                 lastName: '',
                 email: '',
                 birthDate: '',
-                access: false
+                access: ''
             }}
             onSubmit={(data) => filter(data)}
             style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}
